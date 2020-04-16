@@ -6,5 +6,4 @@ function includeHtml(id, path) {
         .then(data => {
             document.querySelector(`#${id}`).innerHTML = data;
         })
-    document.querySelector(`#${id}`).innerHTML = `<object type="text/html" data=\"${path}\">`;
 }
