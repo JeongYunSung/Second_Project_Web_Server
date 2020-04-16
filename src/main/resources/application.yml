@@ -1,0 +1,11 @@
+server:
+  port: 80
+
+spring:
+  restTemplate:
+    factory:
+      readTimeout: 5000
+      connectTimeout: 3000
+    httpClient:
+      maxConnectionPool: 100
+      maxConnPerRoute: 5
