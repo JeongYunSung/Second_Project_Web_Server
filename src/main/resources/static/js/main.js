@@ -7,3 +7,5 @@ function includeHtml(id, path) {
             document.querySelector(`#${id}`).innerHTML = data;
         })
 }
+includeHtml("header", "fragments/header.html");
+includeHtml("footer", "fragments/footer.html");

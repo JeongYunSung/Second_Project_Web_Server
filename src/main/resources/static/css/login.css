@@ -1,0 +1,43 @@
+@import "reset.css";
+@import "fragments.css";
+
+#container {
+    height: 300px;
+}
+
+#article {
+    height: 100%;
+}
+
+#login {
+    height: 100%;
+    display: grid;
+    gap: 1rem;
+    margin: 1rem;
+    grid-template-columns: minmax(150px, 300px) minmax(50px, 100px);
+    justify-content: center;
+    align-content: center;
+}
+
+#member-id {
+    height: 30px;
+    grid-column: 1/2;
+    grid-row: 1/2;
+}
+
+#member-pw {
+    height: 30px;
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+#member-signin {
+    grid-column: 2/3;
+    grid-row: 1/3;
+}
+
+#member-signup {
+    height: 30px;
+    grid-column: 2/3;
+    grid-row: 3/4;
+}

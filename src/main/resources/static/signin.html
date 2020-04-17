@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>JysMoll Login</title>
+    <link rel="stylesheet" href="css/login.css" />
+</head>
+<body>
+    <div id="container">
+        <header id="header"></header>
+        <article id="article">
+            <form id="login">
+                <input name="username" id="member-id" type="text" placeholder="ID" autofocus />
+                <input name="password" id="member-pw" type="text" placeholder="PW" />
+                <input id="member-signin" type="button" value="SignIn" onclick="signIn('login')" />
+                <input id="member-signup" type="button" value="SignUp" />
+            </form>
+        </article>
+        <footer id="footer"></footer>
+    </div>
+    <script type="application/javascript" src="js/main.js"></script>
+    <script type="application/javascript" src="js/signIn.js"></script>
+</body>
+</html>
