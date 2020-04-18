@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JysMoll Product Register</title>
+    <link rel="stylesheet" href="css/productregister.css" />
+</head>
+<body>
+    <div id="container">
+        <header id="header"></header>
+        <article id="article">
+            <h2>상품등록</h2>
+            <form id="product-register-form">
+                <input name="productName" id="product-title" type="text" placeholder="title" autofocus />
+                <textarea name="description" id="product-description" type="text" placeholder="description"></textarea>
+                <input name="value" id="product-price" type="text" placeholder="price" />
+                <select name="types" id="product-type">
+                    <optgroup label="부모카테고리1">
+                        <option value="자식카테고리1-1">자식1-1</option>
+                        <option value="자식카테고리1-2">자식1-2</option>
+                        <option value="자식카테고리1-3">자식1-3</option>
+                    </optgroup>
+                    <optgroup label="부모카테고리2">
+                        <option value="자식카테고리2-1">자식2-1</option>
+                        <option value="자식카테고리2-2">자식2-2</option>
+                        <option value="자식카테고리2-3">자식2-3</option>
+                    </optgroup>
+                </select>
+                <input id="product-register-ok" type="button" value="Ok" />
+                <input id="product-register-cancel" type="button" value="Cancel" />
+            </form>
+        </article>
+        <footer id="footer"></footer>
+    </div>
+    <script type="application/javascript" src="js/main.js"></script>
+</body>
+</html>

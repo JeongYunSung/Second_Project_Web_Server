@@ -1,26 +1,6 @@
 @import "reset.css";
 @import "fragments.css";
 
-#best-product-list-container {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid rgba(1, 1, 1, 0.3);
-    margin: 1rem;
-}
-
-#best-product-list {
-    overflow: hidden;
-    height: 300px;
-}
-
-.best-product {
-    float: left;
-    margin: auto 0;
-    width: 20%;
-}
-
 .product {
     margin: 1.5rem;
 }

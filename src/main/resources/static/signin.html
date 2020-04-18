@@ -2,18 +2,19 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>JysMoll Login</title>
-    <link rel="stylesheet" href="css/login.css" />
+    <title>JysMoll SignIn</title>
+    <link rel="stylesheet" href="css/signin.css" />
 </head>
 <body>
     <div id="container">
         <header id="header"></header>
         <article id="article">
+            <h2>로그인</h2>
             <form id="login">
-                <input name="username" id="member-id" type="text" placeholder="ID" autofocus />
-                <input name="password" id="member-pw" type="text" placeholder="PW" />
+                <input name="username" id="member-id" type="text" placeholder="Identity" autofocus />
+                <input name="password" id="member-pw" type="text" placeholder="Password" />
                 <input id="member-signin" type="button" value="SignIn" onclick="signIn('login')" />
-                <input id="member-signup" type="button" value="SignUp" />
+                <input id="member-signup" type="button" value="SignUp" onclick="window.location.href='http://localhost/signup'" />
             </form>
         </article>
         <footer id="footer"></footer>

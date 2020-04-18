@@ -1,0 +1,56 @@
+@import "reset.css";
+@import "fragments.css";
+
+#article {
+    height: 100%;
+}
+
+#article h2 {
+    margin: 3rem 0;
+}
+
+#product-detail-form {
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    width: 30%;
+}
+
+#product-title {
+    flex-basis: 80%;
+    height: 30px;
+    margin-bottom: 2rem;
+}
+
+#product-description {
+    width: 200px;
+    flex-shrink: 0;
+    resize: none;
+    height: 200px;
+    margin-bottom: 2rem;
+}
+
+#product-price {
+    flex-basis: 38%;
+    height: 30px;
+    margin-bottom: 2rem;
+}
+
+#product-type {
+    flex-basis: 38%;
+    height: 30px;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 800px) {
+    #product-description {
+        flex-basis: 80%;
+        flex-shrink: 1;
+    }
+
+    #product-price {
+        margin-right: 1rem;
+    }
+}
