@@ -18,15 +18,16 @@
     align-content: center;
 }
 
-#member-id {
+.member-input {
     height: 30px;
     grid-column: 1/2;
+}
+
+#member-id {
     grid-row: 1/2;
 }
 
 #member-pw {
-    height: 30px;
-    grid-column: 1/2;
     grid-row: 2/3;
 }
 

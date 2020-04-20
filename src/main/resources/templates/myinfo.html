@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="login" th:content="${session.USER}">
+    <title>JysMoll MyInfo</title>
+    <link rel="stylesheet" href="css/myinfo.css" />
+</head>
+<body>
+    <div id="container">
+        <header id="header"></header>
+        <article id="article">
+            <h2>내 정보</h2>
+            <form id="myinfo-form">
+                <label class="myinfo-label">아이디 : </label><input class="member-input" id="member-id" type="text" readonly />
+                <label class="myinfo-label">닉네임 : </label><input class="member-input" id="member-nickname" type="text" autofocus />
+                <label class="myinfo-label">비밀번호 : </label><input class="member-input" id="member-password" type="password" placeholder="Password" />
+                <label class="myinfo-label">비번확인 : </label><input class="member-input" id="member-verify-password" type="password" placeholder="VerifyPassword" />
+                <input id="member-myinfo-ok" type="button" value="Ok" />
+                <input id="member-myinfo-cancel" type="button" value="Cancel" onclick="window.location.href='http://localhost'" />
+            </form>
+        </article>
+        <footer id="footer"></footer>
+    </div>
+    <script type="application/javascript" src="js/main.js"></script>
+</body>
+</html>

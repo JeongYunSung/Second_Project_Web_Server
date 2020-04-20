@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>JysMoll SignIn</title>
@@ -10,16 +10,16 @@
         <header id="header"></header>
         <article id="article">
             <h2>로그인</h2>
-            <form id="login">
-                <input name="username" id="member-id" type="text" placeholder="Identity" autofocus />
-                <input name="password" id="member-pw" type="text" placeholder="Password" />
-                <input id="member-signin" type="button" value="SignIn" onclick="signIn('login')" />
+            <form id="login" action="/signin" method="post" th:object="${user}">
+                <input th:field="*{username}" class="member-input" id="member-id" type="text" placeholder="Identity" autofocus />
+                <input th:field="*{password}" class="member-input" id="member-pw" type="password" placeholder="Password" />
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <input id="member-signin" type="submit" value="SignIn" />
                 <input id="member-signup" type="button" value="SignUp" onclick="window.location.href='http://localhost/signup'" />
             </form>
         </article>
         <footer id="footer"></footer>
     </div>
     <script type="application/javascript" src="js/main.js"></script>
-    <script type="application/javascript" src="js/signIn.js"></script>
 </body>
 </html>

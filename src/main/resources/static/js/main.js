@@ -11,13 +11,13 @@ function includeHtml(id, path) {
         })
 }
 function isLogin() {
-    const value = document.cookie.match("(^|;) ?X-AUTH-TOKEN=([^;]*)(;|$)");
-    if (value != null) {
+    const value = document.querySelector('meta[name="login"]');
+    if (value != null && value.getAttribute("content") != null) {
         document.querySelector("#signin").toggleAttribute("hidden");
         document.querySelector("#signup").toggleAttribute("hidden");
         document.querySelector("#myinfo").toggleAttribute("hidden");
         document.querySelector("#logout").toggleAttribute("hidden");
     }
 }
-includeHtml("header", "fragments/header.html");
-includeHtml("footer", "fragments/footer.html");
+includeHtml("header", "../fragments/header.html");
+includeHtml("footer", "../fragments/footer.html");

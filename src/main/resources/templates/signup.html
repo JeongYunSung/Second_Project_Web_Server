@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>JysMoll SignUp</title>
@@ -11,11 +11,11 @@
         <article id="article">
             <h2>회원가입</h2>
             <form id="signup-form">
-                <input name="username" id="member-id" type="text" placeholder="Identity" autofocus />
-                <input name="nickname" id="member-nickname" type="text" placeholder="NickName" />
-                <input name="password" id="member-password" type="text" placeholder="Password" />
+                <input name="username" class="member-input" id="member-id" type="text" placeholder="Identity" autofocus />
+                <input name="nickname" class="member-input" id="member-nickname" type="text" placeholder="NickName" />
+                <input name="password" class="member-input" id="member-password" type="password" placeholder="Password" />
                 <input id="member-signup-ok" type="button" value="Ok" />
-                <input id="member-signup-cancel" type="button" value="Cancel" />
+                <input id="member-signup-cancel" type="button" value="Cancel" onclick="window.location.href='http://localhost/signin'" />
             </form>
         </article>
         <footer id="footer"></footer>

@@ -1,11 +1,11 @@
 package com.yunseong.secod_project_web_server.controller.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-@AllArgsConstructor
-public class User {
+@Setter
+public class UserDTO {
 
     private String username;
     private String password;
