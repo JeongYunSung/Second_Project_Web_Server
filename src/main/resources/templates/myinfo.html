@@ -9,15 +9,26 @@
 <body>
     <div id="container">
         <header id="header"></header>
+        <aside id="aside">
+            <ul id="aside-list">
+                <li class="aside-list-item">
+                    <a href="/myinfo/update">정보변경</a>
+                </li>
+                <li class="aside-list-item">
+                    <label>구매목록</label>
+                </li>
+                <li class="aside-list-item">
+                    <label>장바구니</label>
+                </li>
+            </ul>
+        </aside>
         <article id="article">
             <h2>내 정보</h2>
             <form id="myinfo-form">
-                <label class="myinfo-label">아이디 : </label><input class="member-input" id="member-id" type="text" readonly />
-                <label class="myinfo-label">닉네임 : </label><input class="member-input" id="member-nickname" type="text" autofocus />
-                <label class="myinfo-label">비밀번호 : </label><input class="member-input" id="member-password" type="password" placeholder="Password" />
-                <label class="myinfo-label">비번확인 : </label><input class="member-input" id="member-verify-password" type="password" placeholder="VerifyPassword" />
-                <input id="member-myinfo-ok" type="button" value="Ok" />
-                <input id="member-myinfo-cancel" type="button" value="Cancel" onclick="window.location.href='http://localhost'" />
+                <label class="myinfo-label">아이디 : </label><input class="member-input" id="member-id" type="text" th:value="${username}" readonly />
+                <label class="myinfo-label">닉네임 : </label><input class="member-input" id="member-nickname" type="text" th:value="${nickname}" readonly />
+                <label class="myinfo-label">소유금 : </label><input class="member-input" id="member-money" type="text" th:value="${money}" readonly />
+                <label class="myinfo-label">계급 : </label><input class="member-input" id="member-grade" type="text" th:value="${grade}" readonly />
             </form>
         </article>
         <footer id="footer"></footer>

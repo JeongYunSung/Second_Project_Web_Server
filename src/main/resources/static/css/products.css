@@ -3,6 +3,7 @@
 
 .product {
     margin: 1.5rem;
+    cursor: pointer;
 }
 
 .product-info {

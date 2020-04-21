@@ -17,7 +17,6 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    private final WebAccessDeniedHandler webAccessDeniedHandler;
     private final SessionAuthenticationStrategy sessionAuthenticationStrategy;
 
     @Override

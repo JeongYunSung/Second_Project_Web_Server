@@ -1,5 +1,7 @@
 package com.yunseong.secod_project_web_server.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yunseong.secod_project_web_server.common.security.CustomClientHttpRequestInterceptor;
 import com.yunseong.secod_project_web_server.common.security.CustomHttpSessionListener;
 import com.yunseong.secod_project_web_server.common.security.CustomSessionAuthenticationStrategy;
 import org.apache.http.client.HttpClient;
@@ -46,7 +48,10 @@ public class WebConfig {
 
         factory.setHttpClient(httpClient);
 
-        return new RestTemplate(factory);
+        RestTemplate restTemplate = new RestTemplate(factory);
+        restTemplate.setInterceptors(Arrays.asList(new CustomClientHttpRequestInterceptor()));
+
+        return restTemplate;
     }
 
     @Bean
@@ -72,6 +77,11 @@ public class WebConfig {
     @Bean
     public CompositeSessionAuthenticationStrategy sessionAuthenticationStrategy() {
         return new CompositeSessionAuthenticationStrategy(Arrays.asList(csrfAuthenticationStrategy(), customSessionAuthenticationStrategy()));
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        return new ObjectMapper();
     }
 
 //    @Bean

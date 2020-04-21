@@ -10,11 +10,12 @@
         <header id="header"></header>
         <article id="article">
             <h2>회원가입</h2>
-            <form id="signup-form">
-                <input name="username" class="member-input" id="member-id" type="text" placeholder="Identity" autofocus />
-                <input name="nickname" class="member-input" id="member-nickname" type="text" placeholder="NickName" />
-                <input name="password" class="member-input" id="member-password" type="password" placeholder="Password" />
-                <input id="member-signup-ok" type="button" value="Ok" />
+            <form id="signup-form" action="/signup" method="post" th:object="${signup}">
+                <input th:field="*{username}" class="member-input" id="member-id" type="text" placeholder="Identity" autofocus />
+                <input th:field="*{nickname}" class="member-input" id="member-nickname" type="text" placeholder="NickName" />
+                <input th:field="*{password}" class="member-input" id="member-password" type="password" placeholder="Password" />
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <input id="member-signup-ok" type="submit" value="SignUp" />
                 <input id="member-signup-cancel" type="button" value="Cancel" onclick="window.location.href='http://localhost/signin'" />
             </form>
         </article>

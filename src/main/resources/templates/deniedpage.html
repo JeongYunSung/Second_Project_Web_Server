@@ -5,15 +5,18 @@
     <title>Jys Moll Error Denied-Page</title>
 </head>
 <body>
-<input type="text" th:value="${msg}"/>
 <script th:inline="javascript">
     /*<![CDATA[*/
-    const nextPage = [[@{__${nextPage}__}]], msg = [[${msg}]];
-    alert(msg);
-    if(nextPage) {
-        location.href = nextPage;
+    const page = [[${session.page}]], nextPage = [[@{__${session.page.nextPage}__}]], msg = [[${session.page.msg}]];
+    if (page != null) {
+        alert(msg);
+        if (nextPage != null) {
+            location.href = nextPage;
+        }else {
+            location.href = "/signin";
+        }
     }else {
-        location.href = [[@{/signin}]];
+        location.href = "/";
     }
     /*]]>*/
 </script>

@@ -22,6 +22,11 @@ public class CustomErrorController implements ErrorController {
         return "redirect:/";
     }
 
+    @GetMapping("/deniedpage")
+    public String duplicateLogin() {
+        return "/deniedpage";
+    }
+
     @Override
     public String getErrorPath() {
         return "error";
