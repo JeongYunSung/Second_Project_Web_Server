@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionAuthenticationStrategy(this.sessionAuthenticationStrategy)
                 .and()
                     .authorizeRequests()
-                        .antMatchers(HttpMethod.GET, "/").permitAll()
+                        .antMatchers(HttpMethod.GET, "/", "/products", "/products/search").permitAll()
                         .antMatchers(HttpMethod.GET, "/signin", "/signup").anonymous()
                         .antMatchers(HttpMethod.POST, "/signin", "/signup").anonymous()
                         .anyRequest().authenticated()

@@ -9,19 +9,7 @@
 <body>
     <div id="container">
         <header id="header"></header>
-        <aside id="aside">
-            <ul id="aside-list">
-                <li class="aside-list-item">
-                    <a href="/myinfo/update">정보변경</a>
-                </li>
-                <li class="aside-list-item">
-                    <label>구매목록</label>
-                </li>
-                <li class="aside-list-item">
-                    <label>장바구니</label>
-                </li>
-            </ul>
-        </aside>
+        <aside id="aside"></aside>
         <article id="article">
             <h2>내 정보</h2>
             <form id="myinfo-form">
@@ -34,5 +22,6 @@
         <footer id="footer"></footer>
     </div>
     <script type="application/javascript" src="js/main.js"></script>
+    <script type="application/javascript">includeHtml("aside", "../fragments/aside.html");</script>
 </body>
 </html>

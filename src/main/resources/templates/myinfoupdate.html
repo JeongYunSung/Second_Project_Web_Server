@@ -7,35 +7,24 @@
     <link rel="stylesheet" href="../css/myinfoupdate.css" />
 </head>
 <body>
-<div id="container">
-    <header id="header"></header>
-    <aside id="aside">
-        <ul id="aside-list">
-            <li class="aside-list-item">
-                <a href="/myinfo/update">정보변경</a>
-            </li>
-            <li class="aside-list-item">
-                <label>구매목록</label>
-            </li>
-            <li class="aside-list-item">
-                <label>장바구니</label>
-            </li>
-        </ul>
-    </aside>
-    <article id="article">
-        <h2>정보 변경</h2>
-        <form id="myinfo-form" action="/myinfo/update" method="post" th:object="${myInfoForm}">
-            <label class="myinfo-label">닉네임 : </label><input class="member-input" th:field="*{nickname}" id="member-nickname" type="text" placeholder="Nickname" autofocus />
-            <label class="myinfo-label">소유금 : </label><input class="member-input" th:field="*{money}" id="member-money" type="text" placeholder="Money" />
-            <label class="myinfo-label">비밀번호 : </label><input class="member-input" th:field="*{password}" id="member-password" type="password" placeholder="Password" />
-            <label class="myinfo-label">비번확인 : </label><input class="member-input" th:field="*{verifyPassword}" id="member-verify-password" type="password" placeholder="VerifyPassword" />
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-            <input id="member-myinfo-ok" type="submit" value="Ok" />
-            <input id="member-myinfo-cancel" type="button" value="Cancel" onclick="window.location.href='http://localhost/myinfo'" />
-        </form>
-    </article>
-    <footer id="footer"></footer>
-</div>
-<script type="application/javascript" src="../js/main.js"></script>
+    <div id="container">
+        <header id="header"></header>
+        <aside id="aside"></aside>
+        <article id="article">
+            <h2>정보 변경</h2>
+            <form id="myinfo-form" action="/myinfo/update" method="post" th:object="${myInfoForm}">
+                <label class="myinfo-label">닉네임 : </label><input class="member-input" th:field="*{nickname}" id="member-nickname" type="text" placeholder="Nickname" autofocus />
+                <label class="myinfo-label">소유금 : </label><input class="member-input" th:field="*{money}" id="member-money" type="text" placeholder="Money" />
+                <label class="myinfo-label">비밀번호 : </label><input class="member-input" th:field="*{password}" id="member-password" type="password" placeholder="Password" />
+                <label class="myinfo-label">비번확인 : </label><input class="member-input" th:field="*{verifyPassword}" id="member-verify-password" type="password" placeholder="VerifyPassword" />
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <input id="member-myinfo-ok" type="submit" value="Ok" />
+                <input id="member-myinfo-cancel" type="button" value="Cancel" onclick="window.location.href='http://localhost/myinfo'" />
+            </form>
+        </article>
+        <footer id="footer"></footer>
+    </div>
+    <script type="application/javascript" src="../js/main.js"></script>
+    <script type="application/javascript">includeHtml("aside", "../fragments/aside.html");</script>
 </body>
 </html>

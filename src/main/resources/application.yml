@@ -7,5 +7,5 @@ spring:
       readTimeout: 5000
       connectTimeout: 3000
     httpClient:
-      maxConnectionPool: 100
-      maxConnPerRoute: 5
+      maxConnectionPool: 150
+      maxConnPerRoute: 50

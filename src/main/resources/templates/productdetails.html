@@ -11,12 +11,12 @@
         <header id="header"></header>
         <article id="article">
             <h2>상품정보</h2>
-            <form id="product-detail-form">
-                <input name="productName" id="product-title" type="text" readonly />
-                <textarea name="description" id="product-description" type="text" readonly ></textarea>
+            <form id="product-detail-form" th:with="p=${product}">
+                <input name="productName" id="product-title" type="text" th:value="${p.productName}" readonly />
+                <textarea name="description" id="product-description" type="text" th:text="${p.description}" readonly ></textarea>
                 <div id="product-detail-info">
-                    <input id="product-price" type="text" readonly />
-                    <input id="product-type" type="text" readonly />
+                    <input id="product-price" type="text" th:value="'💲 ' + ${p.value}" readonly />
+                    <input id="product-type" type="text" th:value="'👁️‍🗨️ ' + ${p.view} + ' ❤ ' + ${p.recommends}" readonly />
                 </div>
                 <div id="product-button-list">
                     <input id="product-buy" type="submit" value="💲" readonly />

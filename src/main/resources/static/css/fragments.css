@@ -1,7 +1,6 @@
 #container {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
-    /*justify-content: center;*/
 }
 
 #header {
@@ -40,18 +39,33 @@
 #nav-list li {
     width: 100%;
     text-align: center;
-    line-height: 2.5rem;
     height: 2.5rem;
-    border-bottom: 1px solid;
-    overflow:hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    line-height: 2.5rem;
     cursor: pointer;
+    border-bottom: 1px solid;
 }
 
 #nav-list li:hover {
     transition: 0.3s;
     transform: scale(1.2);
+}
+
+.nav-list-item-detail {
+    display: flex;
+    flex-flow: row wrap;
+    z-index: -1;
+}
+
+.nav-list-item-detail a {
+    width: 100%;
+}
+
+.nav-list-item-sub {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.nav-list-item-sub:hover {
+    background-color: rgba(255, 255, 255, 0.7);
 }
 
 #members {

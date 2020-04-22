@@ -1,9 +1,11 @@
 class Page {
 
-    constructor() {
-        const list = document.querySelector("#best-product-list");
-        this._size = Math.floor((list.clientWidth/206) + 0.03);
-        this._maxPage = Math.floor(10/this._size + ((this._size-1)/this._size));
+    constructor(id) {
+        const list = document.querySelector(`#${id}-product-list`);
+        if(list != null) {
+            this._size = Math.floor((list.clientWidth/206) + 0.03);
+            this._maxPage = Math.floor(10/this._size + ((this._size-1)/this._size));
+        }
         this._page = 1;
     }
 
@@ -27,10 +29,11 @@ class Page {
     }
 }
 
-const page = new Page();
+const best = new Page("best");
+const view = new Page("view");
 
-function move(check) {
-    const products = document.querySelectorAll(".best-product");
+function move(check, id, page) {
+    const products = document.querySelectorAll(`.${id}-product`);
     if (check && page.page < page.maxPage) {
         if(page.page == page.maxPage - 1) {
             products[0].style.marginLeft = Number(products[0].style.marginLeft.replace("px", "")) - 200 + "px";
@@ -48,23 +51,35 @@ function move(check) {
     }
 }
 
-function right() {
-    move(true);
+function right_best() {
+    move(true, "best", best);
 }
 
-function left() {
-    move(false);
+function left_best() {
+    move(false, "best", best);
 }
 
-(() => {
-    const list = document.querySelector("#best-product-list");
+function right_view() {
+    move(true, "view", view);
+}
+
+function left_view() {
+    move(false, "view", view);
+}
+
+function event(id, page) {
+    const list = document.querySelector(`#${id}-product-list`);
     window.addEventListener("resize", (event) => {
-        const size = Math.floor((list.clientWidth/206) + 0.03);
-        const maxPage = Math.floor(10/size + ((size-1)/size));
-        if(isNaN(maxPage))
-            return;
-        page.maxPage = maxPage;
-        page.size = size;
-        page.page = 1;
+        if(list != null) {
+            const size = Math.floor((list.clientWidth/206) + 0.03);
+            const maxPage = Math.floor(10/size + ((size-1)/size));
+            if(isNaN(maxPage))
+                return;
+            page.maxPage = maxPage;
+            page.size = size;
+            page.page = 1;
+        }
     });
-})();
+}
+event("best", best);
+event("view", view);

@@ -10,301 +10,60 @@
     <div id="container">
         <header id="header"></header>
         <article id="article">
-            <h2>인기 상품</h2>
+            <h2>추천 상품</h2>
             <div id="best-product-list-container">
-                <label class="best-selector" id="best-left" onclick="left()">❮</label>
-                <ul id="best-product-list">
-                    <li class="best-product" onclick="location.href='http://localhost/products/1'">
+                <label class="best-selector" id="best-left" onclick="left_best()">❮</label>
+                <li th:each="item : ${best}" class="best-product" th:onclick="'window.location.href = \'' + @{/products/{id}(id=${item.productId})} + '\''">
+                    <figure class="product-image" style="background-image: url(images/product.png)" >
+                        <img src="images/product.png" alt="상품이미지">
+                    </figure>
+                    <div class="product-info">
+                        <label class="product-title" th:text="${item.productName}"></label>
+                        <label class="referrer-desc">❤</label>
+                        <label class="product-referrer" th:text="${item.recommends}"></label>
+                        <label class="view-desc">👁️‍🗨️</label>
+                        <label class="product-view" th:text="${item.view}"></label>
+                        <label class="price-desc">💲</label>
+                        <label class="product-price" th:text="${item.value}"></label>
+                    </div>
+                </li>
+                <label class="best-selector" id="best-right" onclick="right_best()">❯</label>
+            </div>
+            <h2>인기 상품</h2>
+            <div id="view-product-list-container">
+                <label class="view-selector" id="view-left" onclick="left_view()">❮</label>
+                <ul id="view-product-list">
+                    <li th:each="item : ${view}" class="view-product" th:onclick="'window.location.href = \'' + @{/products/{id}(id=${item.productId})} + '\''">
                         <figure class="product-image" style="background-image: url(images/product.png)" >
                             <img src="images/product.png" alt="상품이미지">
                         </figure>
                         <div class="product-info">
-                            <label class="product-title">Test1</label>
-                            <label class="referrer-desc">추천수</label>
-                            <label class="product-referrer">5</label>
-                            <label class="price-desc">가격</label>
-                            <label class="product-price">10000</label>
-                        </div>
-                    </li>
-                    <li class="best-product" onclick="location.href='http://localhost/products/1'">
-                        <figure class="product-image" style="background-image: url(images/product.png)" >
-                            <img src="images/product.png" alt="상품이미지">
-                        </figure>
-                        <div class="product-info">
-                            <label class="product-title">Test2</label>
-                            <label class="referrer-desc">추천수</label>
-                            <label class="product-referrer">5</label>
-                            <label class="price-desc">가격</label>
-                            <label class="product-price">10000</label>
-                        </div>
-                    </li>
-                    <li class="best-product" onclick="location.href='http://localhost/products/1'">
-                        <figure class="product-image" style="background-image: url(images/product.png)" >
-                            <img src="images/product.png" alt="상품이미지">
-                        </figure>
-                        <div class="product-info">
-                            <label class="product-title">Test3</label>
-                            <label class="referrer-desc">추천수</label>
-                            <label class="product-referrer">5</label>
-                            <label class="price-desc">가격</label>
-                            <label class="product-price">10000</label>
-                        </div>
-                    </li>
-                    <li class="best-product" onclick="location.href='http://localhost/products/1'">
-                        <figure class="product-image" style="background-image: url(images/product.png)" >
-                            <img src="images/product.png" alt="상품이미지">
-                        </figure>
-                        <div class="product-info">
-                            <label class="product-title">Test4</label>
-                            <label class="referrer-desc">추천수</label>
-                            <label class="product-referrer">5</label>
-                            <label class="price-desc">가격</label>
-                            <label class="product-price">10000</label>
-                        </div>
-                    </li>
-                    <li class="best-product" onclick="location.href='http://localhost/products/1'">
-                        <figure class="product-image" style="background-image: url(images/product.png)" >
-                            <img src="images/product.png" alt="상품이미지">
-                        </figure>
-                        <div class="product-info">
-                            <label class="product-title">Test5</label>
-                            <label class="referrer-desc">추천수</label>
-                            <label class="product-referrer">5</label>
-                            <label class="price-desc">가격</label>
-                            <label class="product-price">10000</label>
-                        </div>
-                    </li>
-                    <li class="best-product" onclick="location.href='http://localhost/products/1'">
-                        <figure class="product-image" style="background-image: url(images/product.png)" >
-                            <img src="images/product.png" alt="상품이미지">
-                        </figure>
-                        <div class="product-info">
-                            <label class="product-title">Test6</label>
-                            <label class="referrer-desc">추천수</label>
-                            <label class="product-referrer">5</label>
-                            <label class="price-desc">가격</label>
-                            <label class="product-price">10000</label>
-                        </div>
-                    </li>
-                    <li class="best-product" onclick="location.href='http://localhost/products/1'">
-                        <figure class="product-image" style="background-image: url(images/product.png)" >
-                            <img src="images/product.png" alt="상품이미지">
-                        </figure>
-                        <div class="product-info">
-                            <label class="product-title">Test7</label>
-                            <label class="referrer-desc">추천수</label>
-                            <label class="product-referrer">5</label>
-                            <label class="price-desc">가격</label>
-                            <label class="product-price">10000</label>
-                        </div>
-                    </li>
-                    <li class="best-product" onclick="location.href='http://localhost/products/1'">
-                        <figure class="product-image" style="background-image: url(images/product.png)" >
-                            <img src="images/product.png" alt="상품이미지">
-                        </figure>
-                        <div class="product-info">
-                            <label class="product-title">Test8</label>
-                            <label class="referrer-desc">추천수</label>
-                            <label class="product-referrer">5</label>
-                            <label class="price-desc">가격</label>
-                            <label class="product-price">10000</label>
-                        </div>
-                    </li>
-                    <li class="best-product" onclick="location.href='http://localhost/products/1'">
-                        <figure class="product-image" style="background-image: url(images/product.png)" >
-                            <img src="images/product.png" alt="상품이미지">
-                        </figure>
-                        <div class="product-info">
-                            <label class="product-title">Test9</label>
-                            <label class="referrer-desc">추천수</label>
-                            <label class="product-referrer">5</label>
-                            <label class="price-desc">가격</label>
-                            <label class="product-price">10000</label>
-                        </div>
-                    </li>
-                    <li class="best-product" onclick="location.href='http://localhost/products/1'">
-                        <figure class="product-image" style="background-image: url(images/product.png)" >
-                            <img src="images/product.png" alt="상품이미지">
-                        </figure>
-                        <div class="product-info">
-                            <label class="product-title">Test10</label>
-                            <label class="referrer-desc">추천수</label>
-                            <label class="product-referrer">5</label>
-                            <label class="price-desc">가격</label>
-                            <label class="product-price">10000</label>
-                        </div>
-                    </li>
-                    <li class="best-product" onclick="location.href='http://localhost/products/1'">
-                        <figure class="product-image" style="background-image: url(images/product.png)" >
-                            <img src="images/product.png" alt="상품이미지">
-                        </figure>
-                        <div class="product-info">
-                            <label class="product-title">Test10</label>
-                            <label class="referrer-desc">추천수</label>
-                            <label class="product-referrer">5</label>
-                            <label class="price-desc">가격</label>
-                            <label class="product-price">10000</label>
+                            <label class="product-title" th:text="${item.productName}"></label>
+                            <label class="referrer-desc">❤</label>
+                            <label class="product-referrer" th:text="${item.recommends}"></label>
+                            <label class="view-desc">👁️‍🗨️</label>
+                            <label class="product-view" th:text="${item.view}"></label>
+                            <label class="price-desc">💲</label>
+                            <label class="product-price" th:text="${item.value}"></label>
                         </div>
                     </li>
                 </ul>
-                <label class="best-selector" id="best-right" onclick="right()">❯</label>
+                <label class="view-selector" id="view-right" onclick="right_view()">❯</label>
             </div>
-            <h2>전체 상품</h2>
+            <h2>최신 상품</h2>
             <ul id="product-list">
-                <li class="product" onclick="location.href='http://localhost/products/1'">
+                <li th:each="item : ${all}" class="product" th:onclick="'window.location.href = \'' + @{/products/{id}(id=${item.productId})} + '\''">
                     <figure class="product-image" style="background-image: url(images/product.png)" >
                         <img src="images/product.png" alt="상품이미지">
                     </figure>
                     <div class="product-info">
-                        <label class="product-title">Test</label>
-                        <label class="referrer-desc">추천수</label>
-                        <label class="product-referrer">5</label>
-                        <label class="price-desc">가격</label>
-                        <label class="product-price">10000</label>
-                    </div>
-                </li>
-                <li class="product" onclick="location.href='http://localhost/products/1'">
-                    <figure class="product-image" style="background-image: url(images/product.png)" >
-                        <img src="images/product.png" alt="상품이미지">
-                    </figure>
-                    <div class="product-info">
-                        <label class="product-title">Test</label>
-                        <label class="referrer-desc">추천수</label>
-                        <label class="product-referrer">5</label>
-                        <label class="price-desc">가격</label>
-                        <label class="product-price">10000</label>
-                    </div>
-                </li>
-                <li class="product" onclick="location.href='http://localhost/products/1'">
-                    <figure class="product-image" style="background-image: url(images/product.png)" >
-                        <img src="images/product.png" alt="상품이미지">
-                    </figure>
-                    <div class="product-info">
-                        <label class="product-title">Test</label>
-                        <label class="referrer-desc">추천수</label>
-                        <label class="product-referrer">5</label>
-                        <label class="price-desc">가격</label>
-                        <label class="product-price">10000</label>
-                    </div>
-                </li>
-                <li class="product" onclick="location.href='http://localhost/products/1'">
-                    <figure class="product-image" style="background-image: url(images/product.png)" >
-                        <img src="images/product.png" alt="상품이미지">
-                    </figure>
-                    <div class="product-info">
-                        <label class="product-title">Test</label>
-                        <label class="referrer-desc">추천수</label>
-                        <label class="product-referrer">5</label>
-                        <label class="price-desc">가격</label>
-                        <label class="product-price">10000</label>
-                    </div>
-                </li>
-                <li class="product" onclick="location.href='http://localhost/products/1'">
-                    <figure class="product-image" style="background-image: url(images/product.png)" >
-                        <img src="images/product.png" alt="상품이미지">
-                    </figure>
-                    <div class="product-info">
-                        <label class="product-title">Test</label>
-                        <label class="referrer-desc">추천수</label>
-                        <label class="product-referrer">5</label>
-                        <label class="price-desc">가격</label>
-                        <label class="product-price">10000</label>
-                    </div>
-                </li>
-                <li class="product" onclick="location.href='http://localhost/products/1'">
-                    <figure class="product-image" style="background-image: url(images/product.png)" >
-                        <img src="images/product.png" alt="상품이미지">
-                    </figure>
-                    <div class="product-info">
-                        <label class="product-title">Test</label>
-                        <label class="referrer-desc">추천수</label>
-                        <label class="product-referrer">5</label>
-                        <label class="price-desc">가격</label>
-                        <label class="product-price">10000</label>
-                    </div>
-                </li>
-                <li class="product" onclick="location.href='http://localhost/products/1'">
-                    <figure class="product-image" style="background-image: url(images/product.png)" >
-                        <img src="images/product.png" alt="상품이미지">
-                    </figure>
-                    <div class="product-info">
-                        <label class="product-title">Test</label>
-                        <label class="referrer-desc">추천수</label>
-                        <label class="product-referrer">5</label>
-                        <label class="price-desc">가격</label>
-                        <label class="product-price">10000</label>
-                    </div>
-                </li>
-                <li class="product" onclick="location.href='http://localhost/products/1'">
-                    <figure class="product-image" style="background-image: url(images/product.png)" >
-                        <img src="images/product.png" alt="상품이미지">
-                    </figure>
-                    <div class="product-info">
-                        <label class="product-title">Test</label>
-                        <label class="referrer-desc">추천수</label>
-                        <label class="product-referrer">5</label>
-                        <label class="price-desc">가격</label>
-                        <label class="product-price">10000</label>
-                    </div>
-                </li>
-                <li class="product" onclick="location.href='http://localhost/products/1'">
-                    <figure class="product-image" style="background-image: url(images/product.png)" >
-                        <img src="images/product.png" alt="상품이미지">
-                    </figure>
-                    <div class="product-info">
-                        <label class="product-title">Test</label>
-                        <label class="referrer-desc">추천수</label>
-                        <label class="product-referrer">5</label>
-                        <label class="price-desc">가격</label>
-                        <label class="product-price">10000</label>
-                    </div>
-                </li>
-                <li class="product" onclick="location.href='http://localhost/products/1'">
-                    <figure class="product-image" style="background-image: url(images/product.png)" >
-                        <img src="images/product.png" alt="상품이미지">
-                    </figure>
-                    <div class="product-info">
-                        <label class="product-title">Test</label>
-                        <label class="referrer-desc">추천수</label>
-                        <label class="product-referrer">5</label>
-                        <label class="price-desc">가격</label>
-                        <label class="product-price">10000</label>
-                    </div>
-                </li>
-                <li class="product" onclick="location.href='http://localhost/products/1'">
-                    <figure class="product-image" style="background-image: url(images/product.png)" >
-                        <img src="images/product.png" alt="상품이미지">
-                    </figure>
-                    <div class="product-info">
-                        <label class="product-title">Test</label>
-                        <label class="referrer-desc">추천수</label>
-                        <label class="product-referrer">5</label>
-                        <label class="price-desc">가격</label>
-                        <label class="product-price">10000</label>
-                    </div>
-                </li>
-                <li class="product" onclick="location.href='http://localhost/products/1'">
-                    <figure class="product-image" style="background-image: url(images/product.png)" >
-                        <img src="images/product.png" alt="상품이미지">
-                    </figure>
-                    <div class="product-info">
-                        <label class="product-title">Test</label>
-                        <label class="referrer-desc">추천수</label>
-                        <label class="product-referrer">5</label>
-                        <label class="price-desc">가격</label>
-                        <label class="product-price">10000</label>
-                    </div>
-                </li>
-                <li class="product" onclick="location.href='http://localhost/products/1'">
-                    <figure class="product-image" style="background-image: url(images/product.png)" >
-                        <img src="images/product.png" alt="상품이미지">
-                    </figure>
-                    <div class="product-info">
-                        <label class="product-title">Test</label>
-                        <label class="referrer-desc">추천수</label>
-                        <label class="product-referrer">5</label>
-                        <label class="price-desc">가격</label>
-                        <label class="product-price">10000</label>
+                        <label class="product-title" th:text="${item.productName}"></label>
+                        <label class="referrer-desc">❤</label>
+                        <label class="product-referrer" th:text="${item.recommends}"></label>
+                        <label class="view-desc">👁️‍🗨️</label>
+                        <label class="product-view" th:text="${item.view}"></label>
+                        <label class="price-desc">💲</label>
+                        <label class="product-price" th:text="${item.value}"></label>
                     </div>
                 </li>
             </ul>

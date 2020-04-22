@@ -12,7 +12,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.web.authentication.session.ChangeSessionIdAuthenticationStrategy;
 import org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy;
+import org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy;
 import org.springframework.security.web.csrf.CsrfAuthenticationStrategy;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
@@ -76,7 +78,9 @@ public class WebConfig {
 
     @Bean
     public CompositeSessionAuthenticationStrategy sessionAuthenticationStrategy() {
-        return new CompositeSessionAuthenticationStrategy(Arrays.asList(csrfAuthenticationStrategy(), customSessionAuthenticationStrategy()));
+        CompositeSessionAuthenticationStrategy compositeSessionAuthenticationStrategy = new CompositeSessionAuthenticationStrategy(
+                Arrays.asList(csrfAuthenticationStrategy(), customSessionAuthenticationStrategy(), new SessionFixationProtectionStrategy(), new ChangeSessionIdAuthenticationStrategy()));
+        return compositeSessionAuthenticationStrategy;
     }
 
     @Bean
