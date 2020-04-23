@@ -48,7 +48,6 @@ public class SignController {
 
     @PostMapping("/signin")
     public String postSignIn(HttpServletRequest request, SignInForm signInForm) {
-//        ResponseEntity<String> responseEntity = this.restTemplate.postForEntity("http://localhost/test", entity, String.class);
         HttpEntity<SignInForm> entity = new HttpEntity<>(signInForm);
         try {
             ResponseEntity<String> responseEntity = this.restTemplate.postForEntity(Util.REST_API_SERVER_URL + "/members/signin", entity, String.class);

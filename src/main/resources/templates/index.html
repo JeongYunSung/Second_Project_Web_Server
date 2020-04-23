@@ -9,24 +9,27 @@
 <body>
     <div id="container">
         <header id="header"></header>
+        <aside id="aside"></aside>
         <article id="article">
             <h2>추천 상품</h2>
             <div id="best-product-list-container">
                 <label class="best-selector" id="best-left" onclick="left_best()">❮</label>
-                <li th:each="item : ${best}" class="best-product" th:onclick="'window.location.href = \'' + @{/products/{id}(id=${item.productId})} + '\''">
-                    <figure class="product-image" style="background-image: url(images/product.png)" >
-                        <img src="images/product.png" alt="상품이미지">
-                    </figure>
-                    <div class="product-info">
-                        <label class="product-title" th:text="${item.productName}"></label>
-                        <label class="referrer-desc">❤</label>
-                        <label class="product-referrer" th:text="${item.recommends}"></label>
-                        <label class="view-desc">👁️‍🗨️</label>
-                        <label class="product-view" th:text="${item.view}"></label>
-                        <label class="price-desc">💲</label>
-                        <label class="product-price" th:text="${item.value}"></label>
-                    </div>
-                </li>
+                <ul id="best-product-list">
+                    <li th:each="item : ${best}" class="best-product" th:onclick="'window.location.href = \'' + @{/products/{id}(id=${item.productId})} + '\''">
+                        <figure class="product-image" style="background-image: url(images/product.png)" >
+                            <img src="images/product.png" alt="상품이미지">
+                        </figure>
+                        <div class="product-info">
+                            <label class="product-title" th:text="${item.productName}"></label>
+                            <label class="referrer-desc">❤</label>
+                            <label class="product-referrer" th:text="${item.recommends}"></label>
+                            <label class="view-desc">👁️‍🗨️</label>
+                            <label class="product-view" th:text="${item.view}"></label>
+                            <label class="price-desc">💲</label>
+                            <label class="product-price" th:text="${item.value}"></label>
+                        </div>
+                    </li>
+                </ul>
                 <label class="best-selector" id="best-right" onclick="right_best()">❯</label>
             </div>
             <h2>인기 상품</h2>
@@ -72,5 +75,6 @@
     </div>
     <script type="application/javascript" src="js/main.js"></script>
     <script type="application/javascript" src="js/sliderbar.js"></script>
+    <script type="application/javascript">includeHtml("aside", "fragments/searchBar.html");</script>
 </body>
 </html>

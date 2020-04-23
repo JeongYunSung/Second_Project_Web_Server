@@ -7,8 +7,8 @@ import lombok.Setter;
 @Setter
 public class ProductsSearchCondition {
 
-    private String categoryName;
-    private String productName;
+    private String category;
+    private String product;
     private Integer min;
     private Integer max;
 }

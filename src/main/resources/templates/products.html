@@ -9,6 +9,7 @@
 <body>
     <div id="container">
         <header id="header"></header>
+        <aside id="aside"></aside>
         <article id="article">
             <ul id="product-list">
                 <li th:each="item : ${all}" class="product" th:onclick="'window.location.href = \'' + @{/products/{id}(id=${item.productId})} + '\''">
@@ -26,9 +27,16 @@
                     </div>
                 </li>
             </ul>
+            <label id="product-left" onclick="">‹</label>
+            <span th:each="i : ${#numbers.sequence(1, page.totalPage)}" th:with="condition=${i==page.number}">
+                <strong th:if="${condition}"><label th:text="${i}"></label></strong>
+                <label th:unless="${condition}" th:text="${i}"></label>
+            </span>
+            <label id="product-right" onclick="">›</label>
         </article>
         <footer id="footer"></footer>
     </div>
     <script type="application/javascript" src="js/main.js"></script>
+    <script type="application/javascript">includeHtml("aside", "fragments/searchBar.html");</script>
 </body>
 </html>

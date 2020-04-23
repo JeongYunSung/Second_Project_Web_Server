@@ -4,11 +4,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yunseong.secod_project_web_server.common.security.CustomClientHttpRequestInterceptor;
 import com.yunseong.secod_project_web_server.common.security.CustomHttpSessionListener;
 import com.yunseong.secod_project_web_server.common.security.CustomSessionAuthenticationStrategy;
+import org.apache.http.Header;
+import org.apache.http.HeaderIterator;
+import org.apache.http.ProtocolVersion;
+import org.apache.http.RequestLine;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.params.HttpParams;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
@@ -21,6 +29,7 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSessionListener;
+import java.net.URI;
 import java.util.Arrays;
 
 @Configuration
@@ -51,6 +60,7 @@ public class WebConfig {
         factory.setHttpClient(httpClient);
 
         RestTemplate restTemplate = new RestTemplate(factory);
+
         restTemplate.setInterceptors(Arrays.asList(new CustomClientHttpRequestInterceptor()));
 
         return restTemplate;
@@ -79,7 +89,7 @@ public class WebConfig {
     @Bean
     public CompositeSessionAuthenticationStrategy sessionAuthenticationStrategy() {
         CompositeSessionAuthenticationStrategy compositeSessionAuthenticationStrategy = new CompositeSessionAuthenticationStrategy(
-                Arrays.asList(csrfAuthenticationStrategy(), customSessionAuthenticationStrategy(), new SessionFixationProtectionStrategy(), new ChangeSessionIdAuthenticationStrategy()));
+                Arrays.asList(csrfAuthenticationStrategy(), customSessionAuthenticationStrategy()));
         return compositeSessionAuthenticationStrategy;
     }
 

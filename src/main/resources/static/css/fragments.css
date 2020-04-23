@@ -56,6 +56,11 @@
     z-index: -1;
 }
 
+.nav-list-item-detail label {
+    width: 100%;
+    text-align: center;
+}
+
 .nav-list-item-detail a {
     width: 100%;
 }
@@ -89,6 +94,10 @@
 
 .aside-list-item {
     margin: 1rem 2rem;
+}
+
+#search-button {
+    cursor: pointer;
 }
 
 #article {
@@ -128,13 +137,15 @@
         grid-column: 1/2;
         grid-row: 2/3;
         justify-self: right;
-        align-self: center;
+        align-items: center;
         margin: 0;
+        height: 80%;
     }
 
     #aside-list {
         flex-flow: column nowrap;
         margin: 0;
+        height: 80%;
     }
 
     #article {
@@ -145,6 +156,26 @@
 
     #footer {
         grid-row: 3/4;
+    }
+
+    #searchbar {
+        display: grid;
+        grid-template-columns: 1fr 3fr 22px;
+    }
+
+    #search-text {
+        grid-column: 1/3;
+        grid-row: 2/3;
+    }
+
+    #search-button {
+        grid-column: 3/4;
+        grid-row: 2/3;
+    }
+
+    #search-type {
+        grid-column: 1/2;
+        grid-row: 1/2;
     }
 }
 

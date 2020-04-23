@@ -9,6 +9,7 @@
 <body>
     <div id="container">
         <header id="header"></header>
+        <aside id="aside"></aside>
         <article id="article">
             <h2>상품등록</h2>
             <form id="product-register-form" action="/products/register" method="post" th:object="${productForm}">
@@ -28,5 +29,6 @@
         <footer id="footer"></footer>
     </div>
     <script type="application/javascript" src="../js/main.js"></script>
+    <script type="application/javascript">includeHtml("aside", "../fragments/aside.html");</script>
 </body>
 </html>

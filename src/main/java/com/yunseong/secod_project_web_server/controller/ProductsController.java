@@ -3,24 +3,30 @@ package com.yunseong.secod_project_web_server.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yunseong.secod_project_web_server.common.Util;
-import com.yunseong.secod_project_web_server.controller.dto.CategoryDto;
-import com.yunseong.secod_project_web_server.controller.dto.ProductDto;
-import com.yunseong.secod_project_web_server.controller.dto.ProductForm;
-import com.yunseong.secod_project_web_server.controller.dto.ProductsSearchCondition;
+import com.yunseong.secod_project_web_server.controller.dto.*;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.client.methods.HttpUriRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static org.springframework.util.StringUtils.*;
 
 @Controller
 public class ProductsController {
@@ -31,38 +37,28 @@ public class ProductsController {
     private ObjectMapper objectMapper;
 
     @GetMapping("/products")
-    public String getProducts(Model model) throws JsonProcessingException {
-        ResponseEntity<String> responseAll = this.restTemplate.getForEntity(Util.REST_API_SERVER_URL + "/products",  String.class);
-
-        return getResponse(model, responseAll);
-    }
-
-    @GetMapping("/products/search")
-    public String getProductsSearch(Model model, ProductsSearchCondition condition) throws JsonProcessingException {
+    public String getProductsSearch(Model model, @ModelAttribute ProductsSearchCondition condition) throws JsonProcessingException {
         String text = "";
-        List<Object> list = new ArrayList<>();
         if (condition != null) {
             text += "?";
-            if(condition.getCategoryName() != null) {
-                text += "categoryName={categoryName}&";
-                list.add(condition.getCategoryName());
+
+            if (hasText(condition.getCategory())) {
+                text += "category=" + condition.getCategory() + "&";
             }
-            if(condition.getProductName() != null) {
-                text += "productName={productName}&";
-                list.add(condition.getProductName());
+            if (hasText(condition.getProduct())) {
+                text += "product=" + condition.getProduct() + "&";
             }
-            if(condition.getMax() != null) {
-                text += "max={max}&";
-                list.add(condition.getMax());
+            if (condition.getMin() != null && condition.getMin() > -1) {
+                text += "min=" + condition.getMin() + "&";
             }
-            if(condition.getMin() != null) {
-                text += "min={min}&";
-                list.add(condition.getMin());
+            if (condition.getMax() != null && condition.getMax() > -1) {
+                text += "max=" + condition.getMax() + "&";
             }
+
             text = text.substring(0, text.length()-1);
         }
 
-        ResponseEntity<String> responseAll = this.restTemplate.getForEntity(Util.REST_API_SERVER_URL + "/products/search" + text,  String.class, list.toArray());
+        ResponseEntity<String> responseAll = this.restTemplate.getForEntity(Util.REST_API_SERVER_URL + "/products/search" + text, String.class);
 
         return getResponse(model, responseAll);
     }
@@ -76,7 +72,12 @@ public class ProductsController {
         if (detailMap != null) {
             list = ((ArrayList<Map>) detailMap.get("productResponseList")).stream().map(ProductDto::new).collect(Collectors.toList());
         }
+
+        Map page = (LinkedHashMap) all.get("page");
+
         model.addAttribute("all", list);
+        int totalPages = (int) page.get("totalPages");
+        model.addAttribute("page", new ProductPage(((int)page.get("number")+1), totalPages == 0 ? 1 : totalPages));
 
         return "/products";
     }
@@ -118,6 +119,12 @@ public class ProductsController {
         model.addAttribute("productForm", new ProductForm());
 
         return "/productregister";
+    }
+
+    @GetMapping("/products/{id}/recommend")
+    public String getProductRecommend(@PathVariable String id) {
+        this.restTemplate.exchange(Util.REST_API_SERVER_URL + "/products/{id}/recommend", HttpMethod.PUT, null, String.class, id);
+        return "redirect:/products/" + id;
     }
 
     @PostMapping("/products/register")

@@ -2,6 +2,7 @@ package com.yunseong.secod_project_web_server.controller.dto;
 
 import lombok.Getter;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public class ProductDto {
     private int value;
     private int view;
     private int recommends;
-    private List<String> categories;
+    private String category;
 
     public ProductDto(Map<String, Object> map) {
         this.productId = (int)map.get("productId");
@@ -26,6 +27,6 @@ public class ProductDto {
         if (recommends != null) {
             this.recommends = ((List)recommends).size();
         }
-        this.categories = (List<String>)map.get("types");
+        this.category = (String)((List<LinkedHashMap>)map.get("types")).get(0).get("categoryName");
     }
 }

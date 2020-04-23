@@ -10,7 +10,7 @@
     margin: 1rem;
 }
 
-.best-selector .view-selector {
+.best-selector, .view-selector {
     margin: 0 1rem;
     cursor: pointer;
 }
@@ -46,6 +46,7 @@
 }
 
 .product-title {
+    width: 100%;
     font-size: 1.5rem;
     font-weight: bold;
     grid-column: 1/3;
