@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="login" th:content="${session.USER}">
+    <title>JysMoll Orders</title>
+    <link rel="stylesheet" href="css/orders.css"/>
+</head>
+<body>
+    <div id="container">
+        <header id="header"></header>
+        <aside id="aside"></aside>
+        <article id="article">
+            <h2>주문 목록</h2>
+            <div id="order-container">
+                <ul id="order-list">
+                    <li class="order-list-item" th:each="i : ${orders}" th:if="${i.orderStatus.equals('ORDER') && i.paymentStatus.equals('READY')}">
+                        <div class="order-product" th:each="j : ${i.products}">
+                            <figure class="order-product-image" style="background-image: url(images/product.png)">
+                                <img src="images/product.png" alt="상품이미지">
+                            </figure>
+                            <div class="order-product-info">
+                                <label class="order-product-name" th:text="${j.productName}"></label>
+                                <label class="order-product-price" th:text="'💲 ' + ${j.productPrice}"></label>
+                            </div>
+                        </div>
+                        <div class="order-result">
+                            <strong><label class="order-totalPrice" th:text="'총 금액 : ' + ${i.totalPrice}"></label></strong>
+                            <form th:action="'orders/' + ${i.orderId} + '/payment'" method="post">
+                                <input class="order-payment-button" type="submit" value="결제"/>
+                            </form>
+                            <form th:action="'/orders/' + ${i.orderId}" method="post" >
+                                <input id="order-product-remove" type="submit" value="❌"/>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </article>
+        <footer id="footer"></footer>
+    </div>
+    <script type="application/javascript" src="../js/main.js"></script>
+    <script type="application/javascript">includeHtml("aside", "fragments/aside.html");</script>
+</body>
+</html>

@@ -27,16 +27,55 @@
                     </div>
                 </li>
             </ul>
-            <label id="product-left" onclick="">‹</label>
-            <span th:each="i : ${#numbers.sequence(1, page.totalPage)}" th:with="condition=${i==page.number}">
-                <strong th:if="${condition}"><label th:text="${i}"></label></strong>
-                <label th:unless="${condition}" th:text="${i}"></label>
-            </span>
-            <label id="product-right" onclick="">›</label>
+            <div id="page-selector">
+                <label th:if="${page.startPage != 1}" class="product-left">‹</label>
+                <span th:each="i : ${#numbers.sequence(page.startPage, page.endPage)}" th:with="condition=${i==page.number}">
+                    <strong th:if="${condition}"><label th:text="${i}"></label></strong>
+                    <label class="page-number" th:unless="${condition}" th:text="${i}"></label>
+                </span>
+                <label th:if="${page.endPage != page.maxPage}" class="product-right">›</label>
+            </div>
         </article>
         <footer id="footer"></footer>
     </div>
     <script type="application/javascript" src="js/main.js"></script>
     <script type="application/javascript">includeHtml("aside", "fragments/searchBar.html");</script>
+    <script type="application/javascript">
+        (() => {
+                const selector = document.querySelector("#page-selector");
+                selector.addEventListener("click", function(event) {
+                    const target = event.target;
+                    if(target.nodeName === "LABEL") {
+                        let check;
+                        let page;
+                        if(target.classList.contains("page-number")) {
+                            check = true;
+                            page = target.innerHTML;
+                        }else if(target.classList.contains("product-left")) {
+                            check = true;
+                            if(target.nextElementSibling.nodeName === "SPAN") {
+                                page = Number(target.nextElementSibling.textContent) - 10;
+                            }
+                        }
+                        else if(target.classList.contains("product-right")) {
+                            check = true;
+                            if(target.previousElementSibling.nodeName === "SPAN") {
+                                page = Number(target.previousElementSibling.textContent) + 1;
+                            }
+                        }
+                        if(check) {
+                            const url = new URL(location.href);
+                            if(url.searchParams.has("page")) {
+                                url.searchParams.set("page", page);
+                            }else {
+                                url.searchParams.append("page", page);
+                            }
+                            location.href = url;
+                        }
+                    }
+                });
+            }
+        )();
+    </script>
 </body>
 </html>

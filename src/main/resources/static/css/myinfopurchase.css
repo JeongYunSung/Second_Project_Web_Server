@@ -1,0 +1,78 @@
+@import "reset.css";
+@import "fragments.css";
+
+#order-container {
+    margin-top: 1rem;
+}
+
+#order-list {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.order-list-item {
+    display: flex;
+    flex-flow: row wrap;
+    margin: 1rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(1, 1, 1, 0.5);
+    width: 70%;
+}
+
+.order-list-item:nth-last-child(1) {
+    border-bottom: 0px;
+}
+
+.order-product-info {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-result {
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.order-product {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    margin: 0 auto;
+    border: 1px solid rgba(1, 1, 1, 0.1);
+}
+
+.order-product-image {
+    grid-column: 1/2;
+    grid-row: 1/3;
+    background-color: lightgray;
+    height: 0;
+    padding-bottom: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.order-product-image img {
+    display: none;
+}
+
+.order-product-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1.5rem;
+    font-weight: bold;
+    grid-column: 2/3;
+    grid-row: 1/2;
+}
+
+.order-product-price {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    grid-column: 2/3;
+    grid-row: 2/3;
+}

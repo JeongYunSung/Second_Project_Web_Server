@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yunseong.secod_project_web_server.common.Util;
 import com.yunseong.secod_project_web_server.common.security.MyUser;
 import com.yunseong.secod_project_web_server.controller.dto.MyInfoUpdateForm;
+import com.yunseong.secod_project_web_server.controller.dto.ProductDto;
+import com.yunseong.secod_project_web_server.controller.dto.ProductPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -19,8 +21,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/myinfo")
@@ -32,9 +34,7 @@ public class MyInfoController {
     private ObjectMapper objectMapper;
 
     @GetMapping
-    public String getMyInfo(@AuthenticationPrincipal MyUser myUser, Model model) throws JsonProcessingException {
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.set(Util.ACCESS_TOKEN, myUser.getAccessToken());
+    public String getMyInfo(Model model) throws JsonProcessingException {
         ResponseEntity<String> entity = restTemplate.getForEntity(Util.REST_API_SERVER_URL + "/members/me", String.class);
 
         Map<String, Object> map = objectMapper.readValue(entity.getBody(), HashMap.class);
@@ -47,16 +47,38 @@ public class MyInfoController {
         return "/myinfo";
     }
 
+    @GetMapping("/purchase")
+    public String getMyInfoPurchase(Model model) throws JsonProcessingException {
+        ResponseEntity<String> entity = restTemplate.getForEntity(Util.REST_API_SERVER_URL + "/members/me", String.class);
+
+        Map<String, Object> map = objectMapper.readValue(entity.getBody(), HashMap.class);
+
+        model.addAttribute("purchase", map.get("purchase"));
+
+        return "/myinfopurchase";
+    }
+
     @GetMapping("/update")
     public String getMyInfoUpdate(Model model) {
         model.addAttribute("myInfoForm", new MyInfoUpdateForm());
         return "/myinfoupdate";
     }
 
+    @GetMapping("/carts")
+    public String getCarts(Model model) throws JsonProcessingException {
+        ResponseEntity<String> responseEntity = this.restTemplate.getForEntity(Util.REST_API_SERVER_URL + "/carts", String.class);
+
+        Map<String, Object> all = this.objectMapper.readValue(responseEntity.getBody(), HashMap.class);
+
+        List list = (ArrayList) all.get("cartItems");
+        if(list == null) return null;
+        model.addAttribute("all", list);
+
+        return "/myinfocart";
+    }
+
     @PostMapping("/update")
-    public String postMyInfoUpdate(@AuthenticationPrincipal MyUser myUser, MyInfoUpdateForm form) {
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.set(Util.ACCESS_TOKEN, myUser.getAccessToken());
+    public String postMyInfoUpdate(MyInfoUpdateForm form) {
         HttpEntity entity = new HttpEntity(form);
         this.restTemplate.exchange(Util.REST_API_SERVER_URL + "/members/me", HttpMethod.PUT, entity, String.class);
 

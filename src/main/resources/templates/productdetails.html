@@ -19,11 +19,18 @@
                     <input id="product-type" type="text" th:value="'👁️‍🗨️ ' + ${p.view} + ' ❤ ' + ${p.recommends}" readonly />
                 </div>
                 <div id="product-button-list">
-                    <input id="product-buy" type="submit" value="💲" readonly />
+                    <form id="product-buy" action="/orders" method="post">
+                        <input id="product-buy-button" type="submit" value="💲" readonly />
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <input name="orderId" type="hidden" th:value="${p.productId}"/>
+                    </form>
                     <input id="product-referrer" type="button" value="👍" th:onclick="'location.href = \'' + @{/products/{id}/recommend(id=${p.productId})} +'\''" readonly />
                     <form action="/carts" method="post">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                        <input type="hidden" th:value="${p}">
+                        <input type="hidden" name="productId" th:value="${p.productId}">
+                        <input type="hidden" name="title" th:value="${p.productName}">
+                        <input type="hidden" name="description" th:value="${p.description}">
+                        <input type="hidden" name="value" th:value="${p.value}">
                         <input id="product-cart" type="submit" value="🛒" readonly />
                     </form>
                     <input id="product-list" type="button" value="📃" th:onclick="'location.href = \'' + @{/products?category=__${p.category}__} +'\''" readonly />

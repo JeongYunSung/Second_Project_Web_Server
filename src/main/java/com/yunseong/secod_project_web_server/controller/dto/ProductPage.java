@@ -10,5 +10,7 @@ import lombok.Setter;
 public class ProductPage {
 
     private int number;
-    private int totalPage;
+    private int startPage;
+    private int endPage;
+    private int maxPage;
 }

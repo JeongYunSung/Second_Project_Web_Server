@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="login" th:content="${session.USER}">
+    <title>JysMoll Cart</title>
+    <link rel="stylesheet" href="../css/myinfocart.css" />
+</head>
+<body>
+<div id="container">
+    <header id="header"></header>
+    <aside id="aside"></aside>
+    <article id="article">
+        <ul id="product-list">
+            <li th:each="item : ${all}" class="product" th:onclick="'window.location.href = \'' + @{/products/{id}(id=${item.productId})} + '\''">
+                <figure class="product-image" style="background-image: url(../images/product.png)" >
+                    <img src="../images/product.png" alt="상품이미지">
+                </figure>
+                <div class="product-info">
+                    <label class="product-title" th:text="${item.title}"></label>
+                    <label class="product-price" th:text="'💲' + ${item.value}"></label>
+                    <form class="product-remove" method="post" th:action="'/carts/' + ${item.productId}">
+                        <input type="submit" value="❌" readonly />
+                    </form>
+                </div>
+            </li>
+        </ul>
+        <form id="cart-payment" action="/orders" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <input th:each="item : ${all}" name="orderId" type="hidden" th:value="${item.productId}" />
+            <input type="submit" value="주문" />
+        </form>
+    </article>
+    <footer id="footer"></footer>
+</div>
+    <script type="application/javascript" src="../js/main.js"></script>
+    <script type="application/javascript">includeHtml("aside", "../fragments/aside.html");</script>
+</body>
+</html>

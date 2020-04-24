@@ -19,7 +19,7 @@
     width: 100%;
     font-size: 1.5rem;
     font-weight: bold;
-    grid-column: 1/3;
+    grid-column: 1/2;
     grid-row: 1/2;
     margin-bottom: 1.5rem;
     text-overflow: ellipsis;
@@ -27,47 +27,23 @@
     overflow: hidden;
 }
 
-.referrer-desc {
-    grid-column: 1/2;
-    grid-row: 2/3;
-}
-
-.product-referrer {
-    grid-column: 1/2;
-    grid-row: 3/4;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.view-desc {
-    grid-column: 2/3;
-    grid-row: 2/3;
-    justify-self: center;
-}
-
-.product-view {
-    grid-column: 2/3;
-    grid-row: 3/4;
-    justify-self: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-.price-desc {
-    grid-column: 3/4;
-    grid-row: 2/3;
-    justify-self: end;
-}
-
 .product-price {
-    grid-column: 3/4;
-    grid-row: 3/4;
+    grid-column: 2/3;
+    grid-row: 1/2;
     justify-self: end;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.product-remove {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    justify-self: end;
+}
+
+.product-remove input[type=submit] {
+    all: unset;
 }
 
 .product-image {
@@ -81,10 +57,6 @@
 
 .product-image img {
     display: none;
-}
-
-.page-number {
-    cursor: pointer;
 }
 
 @media (min-width: 600px) {

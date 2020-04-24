@@ -23,6 +23,7 @@ function loading() {
             document.querySelector("#signup").toggleAttribute("hidden");
             document.querySelector("#myinfo").toggleAttribute("hidden");
             document.querySelector("#logout").toggleAttribute("hidden");
+            document.querySelector("#cart").toggleAttribute("hidden");
         }
         for (let i = 0; i < details.length; i++) {
             const detail = details[i];

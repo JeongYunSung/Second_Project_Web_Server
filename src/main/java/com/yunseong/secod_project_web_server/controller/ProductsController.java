@@ -15,10 +15,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -37,11 +34,9 @@ public class ProductsController {
     private ObjectMapper objectMapper;
 
     @GetMapping("/products")
-    public String getProductsSearch(Model model, @ModelAttribute ProductsSearchCondition condition) throws JsonProcessingException {
-        String text = "";
+    public String getProductsSearch(Model model, @ModelAttribute ProductsSearchCondition condition, @RequestParam(defaultValue = "1") String page) throws JsonProcessingException {
+        String text = "?";
         if (condition != null) {
-            text += "?";
-
             if (hasText(condition.getCategory())) {
                 text += "category=" + condition.getCategory() + "&";
             }
@@ -54,9 +49,12 @@ public class ProductsController {
             if (condition.getMax() != null && condition.getMax() > -1) {
                 text += "max=" + condition.getMax() + "&";
             }
-
-            text = text.substring(0, text.length()-1);
         }
+        if (StringUtils.hasText(page)) {
+            text += "page=" + (Integer.parseInt(page)-1) + "&";
+        }
+
+        text = text.substring(0, text.length()-1);
 
         ResponseEntity<String> responseAll = this.restTemplate.getForEntity(Util.REST_API_SERVER_URL + "/products/search" + text, String.class);
 
@@ -76,8 +74,12 @@ public class ProductsController {
         Map page = (LinkedHashMap) all.get("page");
 
         model.addAttribute("all", list);
-        int totalPages = (int) page.get("totalPages");
-        model.addAttribute("page", new ProductPage(((int)page.get("number")+1), totalPages == 0 ? 1 : totalPages));
+        int totalPage = (int)page.get("totalPages") == 0 ? 1 : (int)page.get("totalPages");
+        int currentPage = (int)page.get("number") + 1;
+        int startPage = (int)(((double)currentPage / 10) - 1) * 10 + 1;
+        int endPage = totalPage - startPage >= 10 ? startPage + 9 : totalPage;
+
+        model.addAttribute("page", new ProductPage(currentPage, startPage, endPage, totalPage));
 
         return "/products";
     }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>JysMoll My Purchase</title>
+    <meta name="login" th:content="${session.USER}">
+    <link rel="stylesheet" href="../css/myinfopurchase.css" />
+</head>
+<body>
+<div id="container">
+    <header id="header"></header>
+    <aside id="aside"></aside>
+    <article id="article">
+        <h2>구매 목록</h2>
+        <div id="order-container">
+            <ul id="order-list">
+                <li class="order-list-item" th:each="i : ${purchase}">
+                    <div class="order-product">
+                        <figure class="order-product-image" style="background-image: url(../images/product.png)">
+                            <img src="../images/product.png" alt="상품이미지">
+                        </figure>
+                        <div class="order-product-info">
+                            <label class="order-product-name" th:text="${i.productName}"></label>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </article>
+    <footer id="footer"></footer>
+</div>
+    <script type="application/javascript" src="../js/main.js"></script>
+    <script type="application/javascript">includeHtml("aside", "../fragments/aside.html");</script>
+</body>
+</html>
